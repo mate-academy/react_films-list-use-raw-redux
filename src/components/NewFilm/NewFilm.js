@@ -58,15 +58,13 @@ export class NewFilm extends Component {
 
     if (hasError) {
       this.setState((prevState) => {
-        const newState = errors.map(([name, error]) => {
-          return [
-            name,
-            {
-              error,
-              value: prevState[name].value,
-            },
-          ];
-        });
+        const newState = errors.map(([name, error]) => ([
+          name,
+          {
+            error,
+            value: prevState[name].value,
+          },
+        ]));
 
         return Object.fromEntries(newState);
       });
