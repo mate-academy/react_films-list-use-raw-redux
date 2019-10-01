@@ -33,4 +33,4 @@ export class FilmsList extends React.Component {
       </div>
     );
   }
-};
+}

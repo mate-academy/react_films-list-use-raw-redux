@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import './App.scss';
-import { FilmsList } from './components/FilmsList';
-import { NewFilm } from './components/NewFilm';
-import { films } from './data';
-import { FormField } from './components/FormField';
 import {
   BrowserRouter,
   Switch,
   Route,
 } from 'react-router-dom';
+
+import { FilmsList } from './components/FilmsList';
+import { NewFilm } from './components/NewFilm';
+import { FormField } from './components/FormField';
 import { FilmDetails } from './components/FilmDetails';
+
+import { store, addNewFilm } from './store';
 
 const API_URL = 'http://www.omdbapi.com/?apikey=2f4a38c9&t=';
 
 export class App extends Component {
   state = {
-    filmsList: films,
     searchWord: '',
   };
 
@@ -24,15 +25,7 @@ export class App extends Component {
   }
 
   handleAddFilm = (newFilm) => {
-    this.setState(prevState => ({
-      filmsList: [
-        ...prevState.filmsList,
-        {
-          id: prevState.filmsList[prevState.filmsList.length - 1].id + 1,
-          ...newFilm,
-        },
-      ],
-    }));
+    store.dispatch(addNewFilm(newFilm));
   };
 
   handleSearchChange = ({ target }) => {
@@ -59,14 +52,12 @@ export class App extends Component {
           imdbUrl: Website,
         };
 
-        this.setState(prevState => ({
-          filmsList: [...prevState.filmsList, newFilm],
-        }));
+        store.dispatch(addNewFilm(newFilm));
       });
   };
 
   render() {
-    const { filmsList, searchWord } = this.state;
+    const { searchWord } = this.state;
 
     return (
       <BrowserRouter>
@@ -98,14 +89,7 @@ export class App extends Component {
               <Route
                 exact
                 path="/film/:id"
-                render={({ match }) => {
-                  const film = filmsList
-                    .find(f => String(f.id) === match.params.id);
-
-                  return (
-                    <FilmDetails {...film} />
-                  );
-                }}
+                component={FilmDetails}
               />
             </Switch>
           </div>
