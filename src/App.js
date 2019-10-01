@@ -47,6 +47,7 @@ export class App extends Component {
         };
 
         store.dispatch(addNewFilm(newFilm));
+        this.setState({ searchWord: '' });
       });
   };
 
