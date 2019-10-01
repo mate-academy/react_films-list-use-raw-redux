@@ -1,15 +1,28 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { store } from '../../store';
 
 export class FilmDetails extends Component {
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() => {
+      this.forceUpdate();
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
   render() {
+    const { match: { params: { id } } } = this.props;
+    const { films } = store.getState();
     const {
       title,
       description,
       imgUrl,
       imdbUrl,
-    } = this.props;
+    } = films.find(item => item.id === id);
 
     return (
       <div className="card">
@@ -48,12 +61,9 @@ export class FilmDetails extends Component {
 }
 
 FilmDetails.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  imgUrl: PropTypes.string.isRequired,
-  imdbUrl: PropTypes.string.isRequired,
-};
-
-FilmDetails.defaultProps = {
-  description: '',
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
 };

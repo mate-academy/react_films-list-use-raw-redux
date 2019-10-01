@@ -1,3 +1,5 @@
+/* eslint-disable arrow-body-style */
+/* eslint-disable no-shadow */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormField } from '../FormField';
@@ -72,7 +74,7 @@ export class NewFilm extends Component {
       });
     } else {
       this.setState(initialState);
-      onAdd(formValue);
+      onAdd({ ...formValue, id: formValue.title });
     }
   };
 
