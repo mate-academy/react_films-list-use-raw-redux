@@ -17,7 +17,6 @@ export class FilmDetails extends Component {
         film: store.getState().films.find(film => String(film.id) === match.params.id),
       });
     });
-    console.log(match.params);
   }
 
   componentWillUnmount() {
