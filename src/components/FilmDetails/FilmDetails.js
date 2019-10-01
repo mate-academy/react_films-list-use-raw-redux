@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { store } from '../../store';
 
 export class FilmDetails extends Component {
@@ -63,3 +64,11 @@ export class FilmDetails extends Component {
     );
   }
 }
+
+FilmDetails.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
+};
