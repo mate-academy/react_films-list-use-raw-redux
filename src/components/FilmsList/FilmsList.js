@@ -1,7 +1,7 @@
 import React from 'react';
 import './FilmsList.scss';
 import { FilmCard } from '../FilmCard';
-import store from '../../store';
+import { store } from '../../store';
 
 export class FilmsList extends React.Component {
   state = {

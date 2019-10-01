@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react';
-import store from '../../store';
+import PropTypes from 'prop-types';
+import { store } from '../../store';
 
 export class FilmDetails extends Component {
   state = {
@@ -10,9 +11,11 @@ export class FilmDetails extends Component {
   unsubscribe = null;
 
   componentDidMount() {
+    const { match } = this.props;
+
     this.unsubscribe = store.subscribe(() => {
       this.setState({
-        film: store.getState().films.find(film => String(film.id) === this.props.match.params.id),
+        film: store.getState().films.find(film => String(film.id) === match.params.id),
       });
     });
   }
@@ -66,3 +69,7 @@ export class FilmDetails extends Component {
     );
   }
 }
+
+FilmDetails.propTypes = {
+  match: PropTypes
+};
