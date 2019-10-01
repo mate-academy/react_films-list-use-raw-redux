@@ -28,20 +28,3 @@ function reducer(state = initialState, action = {}) {
 }
 
 export const store = createStore(reducer);
-
-// console.log('STATE', store.getState());
-//
-// const unsubscribe1 = store.subscribe((state) => {
-//   console.log(state.films.map(({ title }) => title));
-// });
-//
-// store.dispatch(addNewFilm({ title: 'Avengers' }));
-//
-// store.subscribe((state) => {
-//   console.log(state.films);
-// });
-// unsubscribe1();
-//
-// store.dispatch(addNewFilm({ title: 'Spider-Man' }));
-//
-// console.log('STATE', store.getState());
