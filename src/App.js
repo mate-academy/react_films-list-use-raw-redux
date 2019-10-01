@@ -93,9 +93,7 @@ export class App extends Component {
               <Route
                 exact
                 path="/"
-                render={() => (
-                  <FilmsList films={filmsList} />
-                )}
+                component={FilmsList}
               />
               <Route
                 exact
