@@ -6,11 +6,13 @@ export function createStore(reducer) {
     getState() {
       return state;
     },
+
     dispatch(action) {
       state = reducer(state, action);
 
       listeners.forEach(listener => listener(state));
     },
+
     subscribe(cb) {
       if (typeof cb !== 'function') {
         throw new Error('Callback should be a function');

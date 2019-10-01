@@ -1,18 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import './FilmsList.scss';
 import { FilmCard } from '../FilmCard';
+import { store } from '../../store/index';
 
-export const FilmsList = (props) => {
-  const { films } = props;
+export class FilmsList extends Component {
 
-  return (
-    <div className="films">
-      {films.map(film => (
-        <FilmCard key={film.id} {...film} />
-      ))}
-    </div>
-  );
+  state = {
+   films: store.getState().films,
+  }
+
+  unsubscribe = null;
+
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() => {
+      this.setState({
+        films: store.getState().films,
+      });
+    });
+  }
+
+  componentWillMount() {
+    this.unsubscribe = null;
+  }
+
+  render() {
+    const { films } = this.state;
+    console.log(films);
+
+    return (
+      <div className="films">
+        {films.map(film => (
+          <FilmCard key={film.id} {...film} />
+        ))}
+      </div>
+    );
+  }
 };
 
 FilmsList.propTypes = {
