@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { store } from '../../store';
 
 export class FilmDetails extends Component {
@@ -18,6 +17,7 @@ export class FilmDetails extends Component {
         film: store.getState().films.find(film => String(film.id) === match.params.id),
       });
     });
+    console.log(match.params);
   }
 
   componentWillUnmount() {
@@ -69,7 +69,3 @@ export class FilmDetails extends Component {
     );
   }
 }
-
-FilmDetails.propTypes = {
-  match: PropTypes
-};
