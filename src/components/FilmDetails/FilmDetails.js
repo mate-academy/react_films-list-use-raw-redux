@@ -7,31 +7,17 @@ import { store } from '../../store/index';
 export class FilmDetails extends Component {
 
   state = {
-    film: store.getState().films.find(film =>
-      String(film.id) === this.props.match.params.id
-    ),
+    film: this.findFilm(),
   }
 
-  unsubscribe = null;
+  findFilm() {
+    const { match } = this.props;
 
-  componentDidMount() {
-    const searchFilm = store.getState().films.find(film =>
-      String(film.id) === this.props.match.params.id
-    );
-
-    this.unsubscribe = store.subscribe(() => {
-      this.setState({
-        film: searchFilm,
-      });
-    });
-  }
-
-  componentWillMount() {
-    this.unsubscribe = null;
+    return store.getState().films
+      .find(film => String(film.id) === match.params.id);
   }
 
   render() {
-    console.log(this.state.film);
     const {
       title,
       description,

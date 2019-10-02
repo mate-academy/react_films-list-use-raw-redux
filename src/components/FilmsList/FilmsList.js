@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './FilmsList.scss';
 import { FilmCard } from '../FilmCard';
-import { store } from '../../store/index';
+import { store } from '../../store';
 
 export class FilmsList extends Component {
 
@@ -21,13 +21,12 @@ export class FilmsList extends Component {
     });
   }
 
-  componentWillMount() {
-    this.unsubscribe = null;
+  componentWillUnmount() {
+    this.unsubscribe();
   }
 
   render() {
     const { films } = this.state;
-    console.log(films);
 
     return (
       <div className="films">

@@ -11,7 +11,7 @@ import { FilmsList } from './components/FilmsList';
 import { NewFilm } from './components/NewFilm';
 import { FormField } from './components/FormField';
 import { FilmDetails } from './components/FilmDetails';
-import { store, addNewFilm, findNewFilm } from './store/index';
+import { store, addNewFilm } from './store';
 
 const API_URL = 'http://www.omdbapi.com/?apikey=2f4a38c9&t=';
 
@@ -21,14 +21,9 @@ export class App extends Component {
     searchWord: '',
   };
 
-  unsubscribe = null;
 
   componentDidMount() {
     this.searchFilm('spider');
-  }
-
-  componentWillMount() {
-    this.unsubscribe = null;
   }
 
   handleAddFilm = (newFilm) => {
@@ -59,7 +54,7 @@ export class App extends Component {
           imdbUrl: Website,
         };
 
-        store.dispatch(findNewFilm(newFilm));
+        store.dispatch(addNewFilm(newFilm));
       });
   };
 
