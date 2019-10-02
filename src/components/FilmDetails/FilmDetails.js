@@ -1,15 +1,29 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { store } from '../../store/index';
+
 
 export class FilmDetails extends Component {
+
+  state = {
+    film: this.findFilm(),
+  }
+
+  findFilm() {
+    const { match } = this.props;
+
+    return store.getState().films
+      .find(film => String(film.id) === match.params.id);
+  }
+
   render() {
     const {
       title,
       description,
       imgUrl,
       imdbUrl,
-    } = this.props;
+    } = this.state.film;
 
     return (
       <div className="card">
