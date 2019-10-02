@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormField } from '../FormField';
@@ -48,8 +49,8 @@ export class NewFilm extends Component {
     }));
   };
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  handleSubmit = (e) => {
+    e.preventDefault();
 
     const { onAdd } = this.props;
     const formValue = this.getFormValue();
@@ -58,15 +59,13 @@ export class NewFilm extends Component {
 
     if (hasError) {
       this.setState((prevState) => {
-        const newState = errors.map(([name, error]) => {
-          return [
-            name,
-            {
-              error,
-              value: prevState[name].value,
-            },
-          ];
-        });
+        const newState = errors.map(([name, error]) => [
+          name,
+          {
+            error,
+            value: prevState[name].value,
+          },
+        ]);
 
         return Object.fromEntries(newState);
       });

@@ -42,11 +42,9 @@ export class App extends Component {
           Plot,
           Poster,
           Website,
-          imdbID,
         } = data;
 
         const newFilm = {
-          id: imdbID,
           title: Title,
           description: Plot,
           imgUrl: Poster,
@@ -59,7 +57,6 @@ export class App extends Component {
 
   render() {
     const { searchWord } = this.state;
-    const newFilmsList = store.getState().films;
     return (
       <BrowserRouter>
         <div className="page">
@@ -90,14 +87,7 @@ export class App extends Component {
               <Route
                 exact
                 path="/film/:id"
-                render={({ match }) => {
-                  const film = newFilmsList
-                    .find(f => String(f.id) === match.params.id);
-
-                  return (
-                    <FilmDetails {...film} />
-                  );
-                }}
+                component={FilmDetails}
               />
             </Switch>
           </div>

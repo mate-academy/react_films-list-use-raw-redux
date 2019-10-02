@@ -28,7 +28,6 @@ export class FilmsList extends Component {
 
   render() {
     const { filmsList } = this.state;
-    console.log(filmsList);
     return (
       <div className="films">
         {filmsList.map(film => (

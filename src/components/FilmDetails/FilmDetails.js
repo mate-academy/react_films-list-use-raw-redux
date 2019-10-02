@@ -1,15 +1,42 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable max-len */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { store } from '../../store/index';
 
 export class FilmDetails extends Component {
+  state = {
+    filmDetails: store.getState()
+      .films.find(item => String(item.id) === this.props.match.params.id),
+  }
+
+  unSubscribe = null;
+
+  componentDidMount() {
+    this.unSubscribe = store.subscribe(this.setFilmDetails);
+  }
+
+  componentWillUnmount() {
+    this.unSubscribe();
+  }
+
+  setFilmDetails = () => {
+    const { match } = this.props;
+    this.setState({
+      filmDetails: store
+        .getState()
+        .films.find(item => String(item.id) === match.params.id),
+    });
+  }
+
   render() {
+    const { filmDetails } = this.state;
     const {
       title,
       description,
       imgUrl,
       imdbUrl,
-    } = this.props;
+    } = filmDetails;
 
     return (
       <div className="card">
@@ -46,14 +73,3 @@ export class FilmDetails extends Component {
     );
   }
 }
-
-FilmDetails.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  imgUrl: PropTypes.string.isRequired,
-  imdbUrl: PropTypes.string.isRequired,
-};
-
-FilmDetails.defaultProps = {
-  description: '',
-};
