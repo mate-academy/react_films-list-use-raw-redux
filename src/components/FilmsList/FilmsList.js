@@ -5,9 +5,13 @@ import { FilmCard } from '../FilmCard';
 import { store } from '../../store';
 
 export class FilmsList extends Component {
+  state = {
+    films: store.getState().films,
+  }
+
   componentDidMount() {
     this.unsubscribe = store.subscribe(() => {
-      this.forceUpdate();
+      this.setState({ films: store.getState().films });
     });
   }
 
@@ -16,7 +20,7 @@ export class FilmsList extends Component {
   }
 
   render() {
-    const { films } = store.getState();
+    const { films } = this.state;
 
     return (
       <div className="films">

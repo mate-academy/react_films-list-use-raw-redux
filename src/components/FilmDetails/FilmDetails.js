@@ -4,9 +4,13 @@ import PropTypes from 'prop-types';
 import { store } from '../../store';
 
 export class FilmDetails extends Component {
+  state = {
+    film: this.getFilm(),
+  }
+
   componentDidMount() {
     this.unsubscribe = store.subscribe(() => {
-      this.forceUpdate();
+      this.setState({ film: this.getFilm() });
     });
   }
 
@@ -14,15 +18,20 @@ export class FilmDetails extends Component {
     this.unsubscribe();
   }
 
-  render() {
+  getFilm() {
     const { match: { params: { id } } } = this.props;
     const { films } = store.getState();
+    return films.find(item => item.id === id);
+  }
+
+  render() {
+    const { film } = this.state;
     const {
       title,
       description,
       imgUrl,
       imdbUrl,
-    } = films.find(item => item.id === id);
+    } = film;
 
     return (
       <div className="card">

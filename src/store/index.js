@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import uniqid from 'uniqid';
 import { createStore } from './redux';
 
 const ACTION_TYPES = {
@@ -25,7 +26,7 @@ function reducer(state = initialState, action = {}) {
     case ACTION_TYPES.ADD_NEW_FILM: {
       return {
         ...state,
-        films: [...state.films, action.payload],
+        films: [...state.films, { ...action.payload, id: uniqid() }],
       };
     }
 
