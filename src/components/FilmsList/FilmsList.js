@@ -1,19 +1,43 @@
-import React from 'react';
+/* eslint-disable react/prefer-stateless-function */
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { store } from '../../store/index';
 import './FilmsList.scss';
 import { FilmCard } from '../FilmCard';
 
-export const FilmsList = (props) => {
-  const { films } = props;
+export class FilmsList extends Component {
+  state = {
+    filmsList: store.getState().films,
+  }
 
-  return (
-    <div className="films">
-      {films.map(film => (
-        <FilmCard key={film.id} {...film} />
-      ))}
-    </div>
-  );
-};
+  unSubscribe = null;
+
+  componentDidMount() {
+    this.unSubscribe = store.subscribe(this.setFilmsList);
+  }
+
+  componentWillUnmount() {
+    this.unSubscribe();
+  }
+
+  setFilmsList = () => {
+    this.setState({
+      filmsList: [...store.getState().films],
+    });
+  }
+
+  render() {
+    const { filmsList } = this.state;
+    console.log(filmsList);
+    return (
+      <div className="films">
+        {filmsList.map(film => (
+          <FilmCard key={film.id} {...film} />
+        ))}
+      </div>
+    );
+  }
+}
 
 FilmsList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
