@@ -5,17 +5,15 @@ import { store } from '../../store';
 
 export class FilmDetails extends Component {
   state = {
-    film: store.getState().films.find(film => String(film.id) === this.props.match.params.id),
+    film: this.findFilm(),
   }
 
   unsubscribe = null;
 
   componentDidMount() {
-    const { match } = this.props;
-
     this.unsubscribe = store.subscribe(() => {
       this.setState({
-        film: store.getState().films.find(film => String(film.id) === match.params.id),
+        film: this.findFilm(),
       });
     });
   }
@@ -24,9 +22,21 @@ export class FilmDetails extends Component {
     this.unsubscribe();
   }
 
+  findFilm() {
+    const { match } = this.props;
+
+    return store.getState().films
+      .find(film => String(film.id) === match.params.id);
+  }
+
   render() {
     const {
-      film,
+      film: {
+        title,
+        description,
+        imgUrl,
+        imdbUrl,
+      },
     } = this.state;
 
     return (
@@ -34,7 +44,7 @@ export class FilmDetails extends Component {
         <div className="card-image">
           <figure className="image is-4by3">
             <img
-              src={film.imgUrl}
+              src={imgUrl}
               alt="Film logo"
             />
           </figure>
@@ -50,14 +60,14 @@ export class FilmDetails extends Component {
               </figure>
             </div>
             <div className="media-content">
-              <p className="title is-4">{film.title}</p>
+              <p className="title is-4">{title}</p>
             </div>
           </div>
 
           <div className="content">
-            {film.description}
+            {description}
             <br />
-            <a href={film.imdbUrl}>IMDB</a>
+            <a href={imdbUrl}>IMDB</a>
           </div>
         </div>
       </div>
