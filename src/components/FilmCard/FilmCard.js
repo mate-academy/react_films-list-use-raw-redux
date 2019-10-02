@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 import React from 'react';
-import PropTypes from 'prop-types';
 import './FilmCard.scss';
 import { Link } from 'react-router-dom';
 
@@ -46,16 +45,4 @@ export const FilmCard = (props) => {
       </div>
     </Link>
   );
-};
-
-FilmCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  imgUrl: PropTypes.string.isRequired,
-  imdbUrl: PropTypes.string.isRequired,
-};
-
-FilmCard.defaultProps = {
-  description: '',
 };
