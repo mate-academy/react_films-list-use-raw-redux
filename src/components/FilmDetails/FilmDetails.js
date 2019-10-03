@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { store } from '../../store/index';
 
 export class FilmDetails extends Component {
@@ -83,5 +82,4 @@ FilmDetails.propTypes = {
       id: PropTypes.string,
     }),
   }).isRequired,
-
 };

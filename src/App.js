@@ -34,8 +34,8 @@ export class App extends Component {
       .then((data) => {
         const {
           Title,
-          Plot,
           Poster,
+          Plot,
           Website,
           imdbID,
         } = data;

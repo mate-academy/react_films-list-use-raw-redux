@@ -38,16 +38,3 @@ export class FilmsList extends React.Component {
     );
   }
 }
-
-FilmsList.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string,
-    imgUrl: PropTypes.string.isRequired,
-    imdbUrl: PropTypes.string.isRequired,
-  })),
-};
-
-FilmsList.defaultProps = {
-  films: [],
-};
