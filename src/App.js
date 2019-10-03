@@ -37,11 +37,9 @@ export class App extends Component {
           Poster,
           Plot,
           Website,
-          imdbID,
         } = data;
 
         const newFilm = {
-          id: imdbID,
           title: Title,
           description: Plot,
           imgUrl: Poster,
