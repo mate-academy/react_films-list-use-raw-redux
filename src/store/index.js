@@ -21,13 +21,7 @@ function reducer(state = initialState, action = {}) {
       return {
         ...state,
         films: [...state.films, {
-<<<<<<< HEAD
           id: uuidv4(),
-||||||| merged common ancestors
-          id: state.films.imdbID,
-=======
-          id: state.films.length + 1,
->>>>>>> bebf682e4b7d0a867a61f24b9a1f24483c3e54d7
           ...action.payload,
         }],
       };
