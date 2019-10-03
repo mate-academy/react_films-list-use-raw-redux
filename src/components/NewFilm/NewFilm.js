@@ -74,7 +74,7 @@ export class NewFilm extends Component {
       });
     } else {
       this.setState(initialState);
-      onAdd({ ...formValue, id: formValue.title });
+      onAdd(formValue);
     }
   };
 
