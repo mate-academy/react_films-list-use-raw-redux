@@ -19,7 +19,7 @@ function reducer(state = initialState, action = {}) {
       return {
         ...state,
         films: [...state.films, {
-          id: state.films.length + 1,,
+          id: state.films.length + 1,
           ...action.payload,
         }],
       };
