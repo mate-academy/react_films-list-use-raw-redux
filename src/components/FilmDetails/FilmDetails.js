@@ -5,20 +5,25 @@ import { store } from '../../store';
 
 export class FilmDetails extends Component {
   state = {
-    film: store.getState()
-      .films.find(film => film.id === this.props.match.params.id),
+    film: this.findFilm(),
   };
 
-  unsubscribe = null
+  unsubscribe = null;
 
   componentDidMount() {
     this.unsubscribe = store.subscribe(() => {
-      this.forceUpdate();
+      this.findFilm();
     });
   }
 
   componentWillUnmount() {
     this.unsubscribe();
+  }
+
+  findFilm() {
+    const { match } = this.props;
+
+    return store.getState().films.find(({ id }) => String(id) === match.params.id);
   }
 
   render() {

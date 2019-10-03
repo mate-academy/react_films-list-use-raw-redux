@@ -9,7 +9,7 @@ export class FilmsList extends Component {
     films: store.getState().films,
   }
 
-  unsubscribe = null
+  unsubscribe = null;
 
   componentDidMount() {
     this.unsubscribe = store

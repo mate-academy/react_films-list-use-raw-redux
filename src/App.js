@@ -20,8 +20,6 @@ export class App extends Component {
 
   componentDidMount() {
     this.searchFilm('spider');
-    this.unsubscribe = store
-      .subscribe(() => this.setState());
   }
 
   handleAddFilm = (newFilm) => {
