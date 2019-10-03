@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import './FilmsList.scss';
 import { store } from '../../store/index';
 import { FilmCard } from '../FilmCard';
