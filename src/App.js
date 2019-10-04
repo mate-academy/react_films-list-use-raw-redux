@@ -11,7 +11,7 @@ import {
 } from 'react-router-dom';
 import { FilmDetails } from './components/FilmDetails';
 
-const API_URL = 'http://www.omdbapi.com/?apikey=2f4a38c9&t=';
+const API_URL = 'https://www.omdbapi.com/?apikey=2f4a38c9&t=';
 
 export class App extends Component {
   state = {
