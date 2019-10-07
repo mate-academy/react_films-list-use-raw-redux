@@ -1,16 +1,16 @@
-/* eslint-disable max-len */
 import React from 'react';
 import PropTypes from 'prop-types';
 import './FilmCard.scss';
+
 import { Link } from 'react-router-dom';
 
 export const FilmCard = (props) => {
   const {
+    id,
     title,
     description,
     imgUrl,
     imdbUrl,
-    id,
   } = props;
 
   return (
@@ -49,8 +49,8 @@ export const FilmCard = (props) => {
 };
 
 FilmCard.propTypes = {
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
   description: PropTypes.string,
   imgUrl: PropTypes.string.isRequired,
   imdbUrl: PropTypes.string.isRequired,

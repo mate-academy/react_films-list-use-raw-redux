@@ -1,27 +1,28 @@
 import React, { Component } from 'react';
-import './App.scss';
-import { FilmsList } from './components/FilmsList';
-import { NewFilm } from './components/NewFilm';
-import { films } from './data';
-import { FormField } from './components/FormField';
 import {
   BrowserRouter,
   Switch,
   Route,
 } from 'react-router-dom';
+import './App.scss';
+
+import { FilmsList } from './components/FilmsList';
+import NewFilm from './components/NewFilm/NewFilm';
+import FormField from './components/FormField/FormField';
 import { FilmDetails } from './components/FilmDetails';
+
+import { store } from './store/reducers';
+
+import {
+  addNewFilm,
+} from './store/action';
 
 const API_URL = 'http://www.omdbapi.com/?apikey=2f4a38c9&t=';
 
 export class App extends Component {
   state = {
-    filmsList: films,
     searchWord: '',
   };
-
-  componentDidMount() {
-    this.searchFilm('spider');
-  }
 
   handleAddFilm = (newFilm) => {
     this.setState(prevState => ({
@@ -51,17 +52,15 @@ export class App extends Component {
           imdbID,
         } = data;
 
-        const newFilm = {
+        store.dispatch(addNewFilm({
           id: imdbID,
           title: Title,
           description: Plot,
           imgUrl: Poster,
           imdbUrl: Website,
-        };
-
-        this.setState(prevState => ({
-          filmsList: [...prevState.filmsList, newFilm],
         }));
+
+        this.forceUpdate();
       });
   };
 
@@ -94,7 +93,7 @@ export class App extends Component {
                 exact
                 path="/"
                 render={() => (
-                  <FilmsList films={filmsList} />
+                  <FilmsList />
                 )}
               />
               <Route
