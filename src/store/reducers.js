@@ -7,8 +7,10 @@ import {
 import { films } from '../data';
 
 function reducer(state, action) {
+  const { ADD_NEW_FILM } = ACTION_TYPES;
+
   switch (action.type) {
-    case ACTION_TYPES.ADD_NEW_FILM: {
+    case ADD_NEW_FILM: {
       return [ ...state, action.payload];
     }
 

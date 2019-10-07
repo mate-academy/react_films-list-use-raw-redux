@@ -37,31 +37,38 @@ export class App extends Component {
   };
 
   handleSearchChange = ({ target }) => {
-    this.setState({ searchWord: target.value });
+    this.setState({
+      searchWord: target.value,
+    });
   };
 
-  searchFilm = (searchWord) => {
-    fetch(`${API_URL}${searchWord}`)
-      .then(response => response.json())
-      .then((data) => {
-        const {
-          Title,
-          Plot,
-          Poster,
-          Website,
-          imdbID,
-        } = data;
+  searchFilm = async(searchWord) => {
+    try {
+      const filmResponce = await fetch(`${API_URL}${searchWord}`);
+      const {
+        Title,
+        Plot,
+        Poster,
+        Website,
+        imdbID,
+      } = await filmResponce.json();
 
-        store.dispatch(addNewFilm({
-          id: imdbID,
-          title: Title,
-          description: Plot,
-          imgUrl: Poster,
-          imdbUrl: Website,
-        }));
+      if (imdbID === undefined) {
+        throw new Error('Film not found');
+      }
 
-        this.forceUpdate();
-      });
+      store.dispatch(addNewFilm({
+        id: imdbID,
+        title: Title,
+        description: Plot,
+        imgUrl: Poster,
+        imdbUrl: Website,
+      }));
+
+      this.forceUpdate();
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   render() {
