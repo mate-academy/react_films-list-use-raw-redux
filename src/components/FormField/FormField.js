@@ -4,6 +4,7 @@ import cx from 'classnames';
 import './FormField.scss';
 
 export const FormField = memo((props) => {
+  /* eslint-disable */
   const {
     error,
     name,
@@ -13,6 +14,7 @@ export const FormField = memo((props) => {
     placeholder,
     value,
   } = props;
+  /* eslint-enable */
 
   const inputClass = cx('input', { 'is-danger': !!error });
   const controlClass = cx('control', { 'has-icons-right': !!error });
