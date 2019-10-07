@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import './App.scss';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import {
+  HashRouter,
+  Switch,
+  Route,
+} from 'react-router-dom';
 import { FilmsList } from './components/FilmsList';
 import { NewFilm } from './components/NewFilm';
 import { FormField } from './components/FormField';
