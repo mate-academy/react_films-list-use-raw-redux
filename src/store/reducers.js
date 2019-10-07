@@ -11,7 +11,10 @@ function reducer(state, action) {
 
   switch (action.type) {
     case ADD_NEW_FILM: {
-      return [ ...state, action.payload];
+      return [
+        ...state,
+        action.payload,
+      ];
     }
 
     default:
