@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './App.scss';
 
 import {
-  BrowserRouter,
+  HashRouter,
   Switch,
   Route,
   withRouter,
@@ -83,7 +83,7 @@ export class App extends Component {
     const { searchWord } = this.state;
 
     return (
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter>
         <div className="page">
           <div className="content">
             <div className="box">
@@ -120,7 +120,7 @@ export class App extends Component {
             <NewFilm onAdd={this.handleAddFilm} />
           </div>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }
