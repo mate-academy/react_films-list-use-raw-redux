@@ -9,7 +9,7 @@ import {
   Route,
 } from 'react-router-dom';
 import { FilmDetails } from './components/FilmDetails';
-import { store, addNewFilm, findNewFilm } from './store';
+import { store, addNewFilm } from './store';
 
 const API_URL = 'http://www.omdbapi.com/?apikey=2f4a38c9&t=';
 
@@ -50,7 +50,7 @@ export class App extends Component {
           imdbUrl: Website,
         };
 
-        store.dispatch(findNewFilm(newFilm));
+        store.dispatch(addNewFilm(newFilm));
       });
   };
 

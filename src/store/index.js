@@ -10,11 +10,6 @@ export const addNewFilm = film => ({
   payload: film,
 });
 
-export const findNewFilm = film => ({
-  type: ACTION_TYPES.FIND_NEW_FILM,
-  payload: film,
-});
-
 const initialState = {
   films: [],
 };
@@ -22,11 +17,6 @@ const initialState = {
 function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case ACTION_TYPES.ADD_NEW_FILM:
-      return {
-        ...state,
-        films: [...state.films, action.payload],
-      };
-    case ACTION_TYPES.FIND_NEW_FILM:
       return {
         ...state,
         films: [...state.films, action.payload],
