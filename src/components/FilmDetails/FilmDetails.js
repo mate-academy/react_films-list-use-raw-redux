@@ -2,15 +2,36 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export class FilmDetails extends Component {
-  render() {
-    const {
-      title,
-      description,
-      imgUrl,
-      imdbUrl,
-    } = this.props;
+import { store } from '../../store';
 
+export class FilmDetails extends Component {
+  state = {
+    film: this.findFilm(),
+  }
+
+  componentDidMount() {
+    store.subscribe(() => {
+    });
+  }
+
+  componentWillUnmount() {
+    store.subscribe(() => {
+    });
+  }
+
+  findFilm = () => {
+    const { match } = this.props;
+    const { films } = this.store.getState();
+
+    return films.find(film => String(film.id) === match.params.id);
+  }
+
+  render() {
+    const { film } = this.state;
+    const {
+      imgUrl, description, title, imdbUrl,
+    } = film;
+    console.log('filmfilmfilmfilmfilmfilmfilmfilm', film);
     return (
       <div className="card">
         <div className="card-image">
@@ -48,12 +69,8 @@ export class FilmDetails extends Component {
 }
 
 FilmDetails.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  imgUrl: PropTypes.string.isRequired,
-  imdbUrl: PropTypes.string.isRequired,
+  match: PropTypes.string.isRequired,
 };
 
 FilmDetails.defaultProps = {
-  description: '',
 };
