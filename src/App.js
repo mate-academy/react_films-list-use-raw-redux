@@ -10,7 +10,7 @@ import './App.scss';
 import { FilmsList } from './components/FilmsList';
 import NewFilm from './components/NewFilm/NewFilm';
 import FormField from './components/FormField/FormField';
-import { FilmDetails } from './components/FilmDetails';
+import FilmDetails from './components/FilmDetails/FilmDetails';
 
 import { store } from './store/reducers';
 
@@ -71,16 +71,14 @@ export class App extends Component {
         imdbUrl: Website,
       }));
 
-      this.setState({ error: null })
       this.forceUpdate();
     } catch (error) {
-      this.setState({ error: error.message })
-      console.error(error.message);
+      this.setState({ error: error.message });
     }
   };
 
   render() {
-    const { filmsList, searchWord, error } = this.state;
+    const { searchWord, error } = this.state;
 
     return (
       <BrowserRouter>
@@ -108,21 +106,16 @@ export class App extends Component {
               <Route
                 exact
                 path="/"
-                render={() => (
+                component={() => (
                   <FilmsList />
                 )}
               />
               <Route
                 exact
                 path="/film/:id"
-                render={({ match }) => {
-                  const film = filmsList
-                    .find(f => String(f.id) === match.params.id);
-
-                  return (
-                    <FilmDetails {...film} />
-                  );
-                }}
+                component={({ match }) => (
+                  <FilmDetails id={match.params.id} />
+                )}
               />
             </Switch>
           </div>

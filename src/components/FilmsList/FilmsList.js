@@ -7,8 +7,6 @@ import { FilmCard } from '../FilmCard/FilmCard';
 export const FilmsList = () => {
   const films = store.getState();
 
-  console.log(films);
-
   return (
     <div className="films">
       {films.map(film => (
