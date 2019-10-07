@@ -1,22 +1,13 @@
 import React, { Component } from 'react';
 import './App.scss';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 import { FilmsList } from './components/FilmsList';
 import { NewFilm } from './components/NewFilm';
-import { films } from './data';
 import { FormField } from './components/FormField';
-import {
-  HashRouter,
-  Switch,
-  Route,
-} from 'react-router-dom';
-import { FilmList } from './components/FilmsList/FilmsList';
-import { NewFilm } from './components/NewFilm/NewFilm';
-import { FormField } from './components/FormField/FormField';
-import { FilmDetails } from './components/FilmDetails/FilmDetails';
-import { store } from './store/index';
-import { addNewFilm } from './store/index';
+import { FilmDetails } from './components/FilmDetails';
+import { store, addNewFilm } from './store';
 
-const API_URL = 'http://www.omdbapi.com/?apikey=2f4a38c9&t=';
+const API_URL = 'https://www.omdbapi.com/?apikey=2f4a38c9&t=';
 
 export class App extends Component {
   state = {
@@ -51,8 +42,8 @@ export class App extends Component {
           imdbUrl: Website,
         };
 
-       store.dispatch(addNewFilm(newFilm));
-       this.setState({searchWord: ''});
+        store.dispatch(addNewFilm(newFilm));
+        this.setState({ searchWord: '' });
       });
   };
 
@@ -84,12 +75,12 @@ export class App extends Component {
               <Route
                 exact
                 path="/"
-                component = {FilmsList}
+                component={FilmsList}
               />
               <Route
                 exact
                 path="/film/:id"
-                component = {FilmsList}
+                component={FilmDetails}
               />
             </Switch>
           </div>
