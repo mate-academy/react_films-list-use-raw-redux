@@ -4,6 +4,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import shortid from 'shortid';
 import './App.scss';
 
 import { FilmsList } from './components/FilmsList';
@@ -24,16 +25,21 @@ export class App extends Component {
     searchWord: '',
   };
 
-  handleAddFilm = (newFilm) => {
-    this.setState(prevState => ({
-      filmsList: [
-        ...prevState.filmsList,
-        {
-          id: prevState.filmsList[prevState.filmsList.length - 1].id + 1,
-          ...newFilm,
-        },
-      ],
+  handleAddFilm = ({
+    title,
+    description,
+    imgUrl,
+    imdbUrl,
+  }) => {
+    store.dispatch(addNewFilm({
+      id: shortid.generate(),
+      title,
+      description,
+      imgUrl,
+      imdbUrl,
     }));
+
+    this.forceUpdate();
   };
 
   handleSearchChange = ({ target }) => {

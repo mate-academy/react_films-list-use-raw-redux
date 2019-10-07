@@ -48,8 +48,8 @@ class NewFilm extends Component {
     }));
   };
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  handleSubmit = (e) => {
+    e.preventDefault();
 
     const { onAdd } = this.props;
     const formValue = this.getFormValue();
