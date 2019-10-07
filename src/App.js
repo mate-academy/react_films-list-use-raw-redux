@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  HashRouter,
+  BrowserRouter,
   Switch,
   Route,
 } from 'react-router-dom';
@@ -79,7 +79,7 @@ export class App extends Component {
     const { filmsList, searchWord } = this.state;
 
     return (
-      <HashRouter>
+      <BrowserRouter basename={ process.env.PUBLIC_URL }>
         <div className="page">
           <div className="content">
             <div className="box">
@@ -125,7 +125,7 @@ export class App extends Component {
             <NewFilm onAdd={this.handleAddFilm} />
           </div>
         </div>
-      </HashRouter>
+      </BrowserRouter>
     );
   }
 }
