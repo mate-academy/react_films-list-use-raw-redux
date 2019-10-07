@@ -52,7 +52,6 @@ export class App extends Component {
         };
 
         store.dispatch(addNewFilm(newFilm));
-        console.log(store.getState(), newFilm);
       });
   };
 
