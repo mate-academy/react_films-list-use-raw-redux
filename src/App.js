@@ -22,8 +22,6 @@ export class App extends Component {
 
   componentDidMount() {
     this.searchFilm('spider');
-    this.unsubscribe = store
-      .subscribe(() => this.setState());
   }
 
   componentWillUnmount() {
@@ -31,11 +29,7 @@ export class App extends Component {
   }
 
   handleAddFilm = (newFilm) => {
-    const { films } = store.getState();
-    store.dispatch(addNewFilm({
-      ...newFilm,
-      id: films[films.length - 1].id + 1,
-    }));
+    store.dispatch(addNewFilm(newFilm));
   };
 
   handleSearchChange = ({ target }) => {

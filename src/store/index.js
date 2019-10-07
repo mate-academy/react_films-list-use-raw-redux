@@ -1,4 +1,5 @@
 import { createStore } from './redux';
+import uuid4 from 'uuid4';
 
 const ACTION_TYPES = {
   ADD_NEW_FILM: 'FILM::ADD',
@@ -6,7 +7,10 @@ const ACTION_TYPES = {
 
 export const addNewFilm = film => ({
   type: ACTION_TYPES.ADD_NEW_FILM,
-  payload: film,
+  payload: {
+    ...film,
+    id: uuid4(),
+  },
 });
 
 const initialState = {
