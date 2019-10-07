@@ -23,6 +23,7 @@ const API_URL = 'https://www.omdbapi.com/?apikey=2f4a38c9&t=';
 export class App extends Component {
   state = {
     searchWord: '',
+    error: null,
   };
 
   handleAddFilm = ({
@@ -44,6 +45,7 @@ export class App extends Component {
 
   handleSearchChange = ({ target }) => this.setState({
     searchWord: target.value,
+    error: null,
   });
 
   searchFilm = async(searchWord) => {
@@ -69,21 +71,24 @@ export class App extends Component {
         imdbUrl: Website,
       }));
 
+      this.setState({ error: null })
       this.forceUpdate();
     } catch (error) {
+      this.setState({ error: error.message })
       console.error(error.message);
     }
   };
 
   render() {
-    const { filmsList, searchWord } = this.state;
+    const { filmsList, searchWord, error } = this.state;
 
     return (
-      <BrowserRouter basename={ process.env.PUBLIC_URL }>
+      <BrowserRouter>
         <div className="page">
           <div className="content">
             <div className="box">
               <FormField
+                error={error}
                 value={searchWord}
                 name="searchWord"
                 placeholder="Type search word"
