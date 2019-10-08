@@ -20,7 +20,7 @@ function reducer(state = initialState, action = {}) {
         ...state,
         films: [...state.films, {
           ...action.payload,
-          id: store.getState().films.length,
+          id: state.films.length,
         }],
       };
     }
