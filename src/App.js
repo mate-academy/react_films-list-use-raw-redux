@@ -26,6 +26,17 @@ export class App extends Component {
     error: null,
   };
 
+  componentDidMount() {
+    this.unSubscribe = store.subscribe(() => {
+      this.setState({ error: null });
+      this.forceUpdate();
+    });
+  }
+
+  componentWillUnmount() {
+    this.unSubscribe();
+  }
+
   handleAddFilm = ({
     title,
     description,
@@ -39,8 +50,6 @@ export class App extends Component {
       imgUrl,
       imdbUrl,
     }));
-
-    this.forceUpdate();
   };
 
   handleSearchChange = ({ target }) => this.setState({
