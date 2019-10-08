@@ -18,10 +18,7 @@ function reducer(state = initialState, action = {}) {
     case ACTION_TYPES.ADD_NEW_FILM: {
       return {
         ...state,
-        films: [...state.films, {
-          ...action.payload,
-          id: state.films.length,
-        }],
+        films: [...state.films, action.payload],
       };
     }
 
