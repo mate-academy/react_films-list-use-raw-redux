@@ -1,5 +1,5 @@
-import { createStore } from './redux';
 import uuid4 from 'uuid4';
+import { createStore } from './redux';
 
 const ACTION_TYPES = {
   ADD_NEW_FILM: 'FILM::ADD',
