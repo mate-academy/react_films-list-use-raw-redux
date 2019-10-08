@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import './App.scss';
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+} from 'react-router-dom';
 import { FilmsList } from './components/FilmsList';
 import { NewFilm } from './components/NewFilm';
 import { films } from './data';
 import { FormField } from './components/FormField';
-import {
-  HashRouter,
-  Switch,
-  Route,
-} from 'react-router-dom';
 import { FilmDetails } from './components/FilmDetails';
 
 const API_URL = 'https://www.omdbapi.com/?apikey=2f4a38c9&t=';
@@ -69,7 +69,7 @@ export class App extends Component {
     const { filmsList, searchWord } = this.state;
 
     return (
-      <HashRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <div className="page">
           <div className="content">
             <div className="box">
@@ -115,7 +115,7 @@ export class App extends Component {
             <NewFilm onAdd={this.handleAddFilm} />
           </div>
         </div>
-      </HashRouter>
+      </BrowserRouter>
     );
   }
 }
