@@ -6,10 +6,7 @@ const ACTION_TYPES = {
 
 export const addNewFilm = film => ({
   type: ACTION_TYPES.ADD_NEW_FILM,
-  payload: {
-    ...film,
-    id: store.getState().films.length,
-  },
+  payload: film,
 });
 
 const initialState = {
@@ -21,7 +18,10 @@ function reducer(state = initialState, action = {}) {
     case ACTION_TYPES.ADD_NEW_FILM: {
       return {
         ...state,
-        films: [...state.films, action.payload],
+        films: [...state.films, {
+          ...action.payload,
+          id: store.getState().films.length,
+        }],
       };
     }
 
