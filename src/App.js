@@ -41,7 +41,7 @@ export class App extends Component {
 
   handleAddFilm = (newFilm) => {
     const prevState = store.getState().films;
-    console.log(prevState)
+
     store.dispatch(addNewFilm(
       {
         id: prevState[prevState.length - 1].id + 1,
