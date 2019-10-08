@@ -8,8 +8,6 @@ export class FilmsList extends React.Component {
     films: store.getState().films,
   }
 
-  unsubscribe = null
-
   componentDidMount() {
     this.unsubscribe = store
       .subscribe(() => {

@@ -8,8 +8,6 @@ export class FilmDetails extends Component {
     film: this.findFilm(),
   }
 
-  unsubscribe = null
-
   componentDidMount() {
     this.unsubscribe = store
       .subscribe(() => {
