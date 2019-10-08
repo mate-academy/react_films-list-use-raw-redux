@@ -79,8 +79,6 @@ export class App extends Component {
         imgUrl: Poster,
         imdbUrl: Website,
       }));
-
-      this.forceUpdate();
     } catch (error) {
       this.setState({ error: error.message });
     }
