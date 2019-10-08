@@ -1,20 +1,19 @@
-/* eslint-disable max-len */
 import React from 'react';
 import PropTypes from 'prop-types';
 import './FilmCard.scss';
+
 import { Link } from 'react-router-dom';
 
-export const FilmCard = (props) => {
-  const {
-    title,
-    description,
-    imgUrl,
-    imdbUrl,
-    id,
-  } = props;
+const FilmCard = ({
+  id,
+  title,
+  description,
+  imgUrl,
+  imdbUrl,
+}) => (
 
-  return (
-    <Link to={`/film/${id}`} className="card">
+  <div className="card">
+    <Link to={`/film/${id}`}>
       <div className="card-image">
         <figure className="image is-4by3">
           <img
@@ -41,16 +40,16 @@ export const FilmCard = (props) => {
         <div className="content">
           {description}
           <br />
-          <a href={imdbUrl}>IMDB</a>
         </div>
       </div>
     </Link>
-  );
-};
+    <a href={imdbUrl}>IMDB</a>
+  </div>
+);
 
 FilmCard.propTypes = {
-  title: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   description: PropTypes.string,
   imgUrl: PropTypes.string.isRequired,
   imdbUrl: PropTypes.string.isRequired,
@@ -59,3 +58,5 @@ FilmCard.propTypes = {
 FilmCard.defaultProps = {
   description: '',
 };
+
+export default FilmCard;
