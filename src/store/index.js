@@ -1,16 +1,19 @@
 import { createStore } from './redux';
+import { films } from '../data';
 
+// action types
 const ACTION_TYPES = {
   ADD_NEW_FILM: 'FILM::ADD',
 };
 
+// action creators
 export const addNewFilm = film => ({
   type: ACTION_TYPES.ADD_NEW_FILM,
   payload: film,
 });
 
 const initialState = {
-  films: [],
+  films,
 };
 
 function reducer(state = initialState, action = {}) {
