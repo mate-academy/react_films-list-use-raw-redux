@@ -6,6 +6,7 @@ import {
   Route,
 } from 'react-router-dom';
 
+import uuid from 'uuidv4';
 import { FilmsList } from './components/FilmsList';
 import { NewFilm } from './components/NewFilm';
 import { FormField } from './components/FormField';
@@ -44,12 +45,14 @@ export class App extends Component {
         } = data;
 
         const newFilm = {
-          id: imdbID,
+          id: uuid(),
           title: Title,
           description: Plot,
           imgUrl: Poster,
           imdbUrl: Website,
         };
+
+        console.log(newFilm.id);
 
         store.dispatch(addNewFilm(newFilm));
       });
