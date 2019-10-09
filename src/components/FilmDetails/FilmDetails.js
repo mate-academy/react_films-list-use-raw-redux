@@ -4,12 +4,16 @@ import { store } from '../../store';
 
 export class FilmDetails extends Component {
   state = {
-    film: this.getFilm(),
+    film: this.findFilm(),
   }
+
+  unsubscribe = null;
 
   componentDidMount() {
     this.unsubscribe = store.subscribe(() => {
-      this.setState({ film: this.getFilm() });
+      this.setState({
+        film: this.findFilm(),
+      });
     });
   }
 
@@ -17,20 +21,22 @@ export class FilmDetails extends Component {
     this.unsubscribe();
   }
 
-  getFilm() {
-    const { match: { params: { id } } } = this.props;
-    const { films } = store.getState();
-    return films.find(item => item.id === id);
+  findFilm() {
+    const { match } = this.props;
+
+    return store.getState().films
+      .find(film => String(film.id) === match.params.id);
   }
 
   render() {
-    const { film } = this.state;
     const {
-      title,
-      description,
-      imgUrl,
-      imdbUrl,
-    } = film;
+      film: {
+        title,
+        description,
+        imgUrl,
+        imdbUrl,
+      },
+    } = this.state;
 
     return (
       <div className="card">

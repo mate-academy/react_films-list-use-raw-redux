@@ -1,17 +1,20 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import './FilmsList.scss';
 import { FilmCard } from '../FilmCard';
 import { store } from '../../store';
 
-export class FilmsList extends Component {
+export class FilmsList extends React.Component {
   state = {
     films: store.getState().films,
   }
 
+  unsubscribe = null;
+
   componentDidMount() {
     this.unsubscribe = store.subscribe(() => {
-      this.setState({ films: store.getState().films });
+      this.setState({
+        films: store.getState().films,
+      });
     });
   }
 
@@ -31,16 +34,3 @@ export class FilmsList extends Component {
     );
   }
 }
-
-FilmsList.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string,
-    imgUrl: PropTypes.string.isRequired,
-    imdbUrl: PropTypes.string.isRequired,
-  })),
-};
-
-FilmsList.defaultProps = {
-  films: [],
-};

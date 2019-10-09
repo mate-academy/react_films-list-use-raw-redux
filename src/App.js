@@ -5,10 +5,12 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+
 import { FilmsList } from './components/FilmsList';
 import { NewFilm } from './components/NewFilm';
 import { FormField } from './components/FormField';
 import { FilmDetails } from './components/FilmDetails';
+
 import { store, addNewFilm } from './store';
 
 const API_URL = 'https://www.omdbapi.com/?apikey=2f4a38c9&t=';
@@ -17,6 +19,10 @@ export class App extends Component {
   state = {
     searchWord: '',
   };
+
+  componentDidMount() {
+    this.searchFilm('day');
+  }
 
   handleAddFilm = (newFilm) => {
     store.dispatch(addNewFilm(newFilm));
@@ -47,7 +53,6 @@ export class App extends Component {
         };
 
         store.dispatch(addNewFilm(newFilm));
-        this.setState({ searchWord: '' });
       });
   };
 
