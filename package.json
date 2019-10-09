@@ -5,7 +5,7 @@
   "keywords": [],
   "author": "Mate Academy",
   "license": "GPL-3.0",
-  "homepage": ".",
+  "homepage": "https://amserhii11.github.io/react_films-list-use-raw-redux/",
   "dependencies": {
     "bulma": "^0.7.5",
     "classnames": "^2.2.6",
