@@ -41,7 +41,6 @@ export class App extends Component {
           Plot,
           Poster,
           Website,
-          imdbID,
         } = data;
 
         const newFilm = {
@@ -51,8 +50,6 @@ export class App extends Component {
           imgUrl: Poster,
           imdbUrl: Website,
         };
-
-        console.log(newFilm.id);
 
         store.dispatch(addNewFilm(newFilm));
       });
