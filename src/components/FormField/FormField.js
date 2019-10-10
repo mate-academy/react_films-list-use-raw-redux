@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import './FormField.scss';
 
-export const FormField = memo((props) => {
+const FormField = memo((props) => {
   const {
     error,
     name,
@@ -63,3 +63,5 @@ FormField.defaultProps = {
   type: 'text',
   placeholder: 'Type text here',
 };
+
+export default FormField;
