@@ -10,7 +10,7 @@ const FilmDetails = ({ id }) => {
     imgUrl,
     description,
     imdbUrl,
-  } = store.getState().find(item => item.id === id);
+  } = store.getState().films.find((item) => item.id === id);
 
   return (
     <div className="card">

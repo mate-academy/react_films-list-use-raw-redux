@@ -7,18 +7,26 @@ import {
 } from './action';
 
 function reducer(state, action) {
-  const { ADD_NEW_FILM } = ACTION_TYPES;
+  const { ADD_NEW_FILM, SET_ERROR_MESSAGE } = ACTION_TYPES;
+  const { films } = state;
 
   switch (action.type) {
     case ADD_NEW_FILM: {
-      if (state.find(film => film.id === action.payload.id)) {
+      if (films.find((film) => film.id === action.payload.id)) {
         throw new Error('The film is present');
       }
 
-      return [
+      return {
         ...state,
-        action.payload,
-      ];
+        films: [...films, action.payload],
+      };
+    }
+
+    case SET_ERROR_MESSAGE: {
+      return {
+        ...state,
+        error: action.payload,
+      };
     }
 
     default:
@@ -26,7 +34,7 @@ function reducer(state, action) {
   }
 }
 
-const films = [{
+const filmsInitial = [{
   id: '1',
   title: 'Groundhog Day',
   description: `A weatherman finds himself inexplicably
@@ -37,6 +45,6 @@ const films = [{
 
 export const store = createStore(
   reducer,
-  films,
+  { films: filmsInitial, error: null },
   devToolsEnhancer(addNewFilm())
 );

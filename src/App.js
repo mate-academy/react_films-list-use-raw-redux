@@ -17,6 +17,7 @@ import { store } from './store/reducers';
 
 import {
   addNewFilm,
+  setErrorMessage,
 } from './store/action';
 
 const API_URL = 'https://www.omdbapi.com/?apikey=2f4a38c9&t=';
@@ -24,18 +25,13 @@ const API_URL = 'https://www.omdbapi.com/?apikey=2f4a38c9&t=';
 export class App extends Component {
   state = {
     searchWord: '',
-    error: null,
+    isError: false,
   };
 
   componentDidMount() {
-    this.unSubscribe = store.subscribe(() => {
-      this.setState({ error: null });
+    store.subscribe(() => {
       this.forceUpdate();
     });
-  }
-
-  componentWillUnmount() {
-    this.unSubscribe();
   }
 
   handleAddFilm = ({
@@ -53,10 +49,10 @@ export class App extends Component {
     }));
   };
 
-  handleSearchChange = ({ target }) => this.setState({
-    searchWord: target.value,
-    error: null,
-  });
+  handleSearchChange = ({ target }) => {
+    this.setState({ searchWord: target.value, isError: false });
+    store.dispatch(setErrorMessage(null));
+  };
 
   searchFilm = async(searchWord) => {
     try {
@@ -81,12 +77,13 @@ export class App extends Component {
         imdbUrl: Website,
       }));
     } catch (error) {
-      this.setState({ error: error.message });
+      store.dispatch(setErrorMessage(error.message));
+      this.setState({ isError: true });
     }
   };
 
   render() {
-    const { searchWord, error } = this.state;
+    const { searchWord, isError } = this.state;
 
     return (
       <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -94,7 +91,7 @@ export class App extends Component {
           <div className="content">
             <div className="box">
               <FormField
-                error={error}
+                error={isError}
                 value={searchWord}
                 name="searchWord"
                 placeholder="Type search word"

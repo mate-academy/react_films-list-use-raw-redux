@@ -5,7 +5,7 @@ import { store } from '../../store/reducers';
 import FilmCard from '../FilmCard/FilmCard';
 
 const FilmsList = () => {
-  const films = store.getState();
+  const { films } = store.getState();
 
   return (
     <div className="films">

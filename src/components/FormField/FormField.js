@@ -2,10 +2,10 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import './FormField.scss';
+import { store } from '../../store/reducers';
 
 const FormField = memo((props) => {
   const {
-    error,
     name,
     label,
     type,
@@ -13,6 +13,8 @@ const FormField = memo((props) => {
     placeholder,
     value,
   } = props;
+
+  const { error } = store.getState();
 
   const inputClass = cx('input', { 'is-danger': !!error });
   const controlClass = cx('control', { 'has-icons-right': !!error });
@@ -54,12 +56,12 @@ FormField.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   type: PropTypes.string,
-  error: PropTypes.string,
+  error: PropTypes.bool,
   placeholder: PropTypes.string,
 };
 
 FormField.defaultProps = {
-  error: '',
+  error: false,
   type: 'text',
   placeholder: 'Type text here',
 };
