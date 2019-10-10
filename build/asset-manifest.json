@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/react_films-list-use-raw-redux/static/css/main.36605e0d.chunk.css",
+    "main.js": "/react_films-list-use-raw-redux/static/js/main.4d019cd3.chunk.js",
+    "main.js.map": "/react_films-list-use-raw-redux/static/js/main.4d019cd3.chunk.js.map",
+    "runtime-main.js": "/react_films-list-use-raw-redux/static/js/runtime-main.752e9f9a.js",
+    "runtime-main.js.map": "/react_films-list-use-raw-redux/static/js/runtime-main.752e9f9a.js.map",
+    "static/css/2.1ab5750d.chunk.css": "/react_films-list-use-raw-redux/static/css/2.1ab5750d.chunk.css",
+    "static/js/2.8f106110.chunk.js": "/react_films-list-use-raw-redux/static/js/2.8f106110.chunk.js",
+    "static/js/2.8f106110.chunk.js.map": "/react_films-list-use-raw-redux/static/js/2.8f106110.chunk.js.map",
+    "index.html": "/react_films-list-use-raw-redux/index.html",
+    "precache-manifest.ec373721b09e8ca570132d6f9690aa45.js": "/react_films-list-use-raw-redux/precache-manifest.ec373721b09e8ca570132d6f9690aa45.js",
+    "service-worker.js": "/react_films-list-use-raw-redux/service-worker.js",
+    "static/css/2.1ab5750d.chunk.css.map": "/react_films-list-use-raw-redux/static/css/2.1ab5750d.chunk.css.map",
+    "static/css/main.36605e0d.chunk.css.map": "/react_films-list-use-raw-redux/static/css/main.36605e0d.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.752e9f9a.js",
+    "static/css/2.1ab5750d.chunk.css",
+    "static/js/2.8f106110.chunk.js",
+    "static/css/main.36605e0d.chunk.css",
+    "static/js/main.4d019cd3.chunk.js"
+  ]
+}
