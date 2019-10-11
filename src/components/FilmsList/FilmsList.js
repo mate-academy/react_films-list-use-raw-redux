@@ -28,7 +28,6 @@ export class FilmsList extends Component {
 
   render() {
     const { films } = this.state;
-    console.log('films');
 
     return (
       <div className="films">
