@@ -52,11 +52,12 @@ FilmCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   imgUrl: PropTypes.string.isRequired,
-  imdbUrl: PropTypes.string.isRequired,
+  imdbUrl: PropTypes.string,
 };
 
 FilmCard.defaultProps = {
   description: '',
+  imdbUrl: null,
 };
 
 export default FilmCard;

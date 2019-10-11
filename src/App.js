@@ -8,9 +8,9 @@ import {
 import uuidv4 from 'uuidv4';
 import './App.scss';
 
-import FilmsList from './components/FilmsList/FilmsList';
+import { FilmsList } from './components/FilmsList/FilmsList';
 import NewFilm from './components/NewFilm/NewFilm';
-import FormField from './components/FormField/FormField';
+import { FormField } from './components/FormField/FormField';
 import FilmDetails from './components/FilmDetails/FilmDetails';
 
 import { store } from './store/reducers';
@@ -25,14 +25,7 @@ const API_URL = 'https://www.omdbapi.com/?apikey=2f4a38c9&t=';
 export class App extends Component {
   state = {
     searchWord: '',
-    isError: false,
   };
-
-  componentDidMount() {
-    store.subscribe(() => {
-      this.forceUpdate();
-    });
-  }
 
   handleAddFilm = ({
     title,
@@ -50,7 +43,7 @@ export class App extends Component {
   };
 
   handleSearchChange = ({ target }) => {
-    this.setState({ searchWord: target.value, isError: false });
+    this.setState({ searchWord: target.value });
     store.dispatch(setErrorMessage(null));
   };
 
@@ -78,12 +71,11 @@ export class App extends Component {
       }));
     } catch (error) {
       store.dispatch(setErrorMessage(error.message));
-      this.setState({ isError: true });
     }
   };
 
   render() {
-    const { searchWord, isError } = this.state;
+    const { searchWord } = this.state;
 
     return (
       <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -91,7 +83,6 @@ export class App extends Component {
           <div className="content">
             <div className="box">
               <FormField
-                error={isError}
                 value={searchWord}
                 name="searchWord"
                 placeholder="Type search word"
@@ -111,9 +102,7 @@ export class App extends Component {
               <Route
                 exact
                 path="/"
-                component={() => (
-                  <FilmsList />
-                )}
+                component={FilmsList}
               />
               <Route
                 exact

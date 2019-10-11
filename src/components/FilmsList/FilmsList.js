@@ -1,19 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './FilmsList.scss';
 
 import { store } from '../../store/reducers';
 import FilmCard from '../FilmCard/FilmCard';
 
-const FilmsList = () => {
-  const { films } = store.getState();
+export class FilmsList extends Component {
+  state = {
+    films: store.getState().films,
+  };
 
-  return (
-    <div className="films">
-      {films.map((film) => (
-        <FilmCard key={film.id} {...film} />
-      ))}
-    </div>
-  );
-};
+  componentDidMount() {
 
-export default FilmsList;
+    this.unSubscribe = store.subscribe(() => {
+      const { films } = this.state;
+      const newFilms = store.getState().films;
+      if (films.length !== newFilms.length) {
+        this.setState({
+          films: store.getState().films,
+        });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.unSubscribe();
+  }
+
+  render() {
+    const { films } = this.state;
+    console.log('films');
+
+    return (
+      <div className="films">
+        {films.map((film) => (
+          <FilmCard key={film.id} {...film} />
+        ))}
+      </div>
+    );
+  }
+}
