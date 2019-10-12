@@ -14,6 +14,7 @@ export class FilmsList extends Component {
     this.unSubscribe = store.subscribe(() => {
       const { films } = this.state;
       const newFilms = store.getState().films;
+
       if (films.length !== newFilms.length) {
         this.setState({
           films: store.getState().films,

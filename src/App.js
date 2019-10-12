@@ -107,9 +107,7 @@ export class App extends Component {
               <Route
                 exact
                 path="/film/:id"
-                component={({ match }) => (
-                  <FilmDetails id={match.params.id} />
-                )}
+                component={FilmDetails}
               />
             </Switch>
           </div>

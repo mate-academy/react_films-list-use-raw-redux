@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 
 import { store } from '../../store/reducers';
 
-const FilmDetails = ({ id }) => {
+const FilmDetails = ({ match }) => {
   const {
     title,
     imgUrl,
     description,
     imdbUrl,
-  } = store.getState().films.find((item) => item.id === id);
+  } = store.getState().films.find((item) => item.id === match.params.id);
 
   return (
     <div className="card">
@@ -48,7 +48,7 @@ const FilmDetails = ({ id }) => {
 };
 
 FilmDetails.propTypes = {
-  id: PropTypes.string.isRequired,
+  match: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default FilmDetails;
