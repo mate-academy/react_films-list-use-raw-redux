@@ -1,52 +1,69 @@
-import React, { memo } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import './FormField.scss';
+import { store } from '../../store/reducers';
 
-export const FormField = memo((props) => {
-  const {
-    error,
-    name,
-    label,
-    type,
-    onChange,
-    placeholder,
-    value,
-  } = props;
+export class FormField extends Component {
+  state = {
+    error: store.getState().error,
+  };
 
-  const inputClass = cx('input', { 'is-danger': !!error });
-  const controlClass = cx('control', { 'has-icons-right': !!error });
+  componentDidMount() {
+    this.unSubscribe = store.subscribe(() => {
+      this.setState({
+        error: store.getState().error,
+      });
+    });
+  }
 
-  const Control = type === 'textarea' ? type : 'input';
+  render() {
+    const { error } = this.state;
 
-  return (
-    <div className="field">
-      <label htmlFor={name} className="label">
-        {label}
-      </label>
-      <div className={controlClass}>
-        <Control
-          name={name}
-          id={name}
-          className={inputClass}
-          type={type}
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-        />
+    const {
+      name,
+      label,
+      type,
+      onChange,
+      placeholder,
+      value,
+    } = this.props;
+
+    const inputClass = cx('input', { 'is-danger': !!error });
+
+    const controlClass = cx('control', { 'has-icons-right': !!error });
+
+    const Control = type === 'textarea' ? type : 'input';
+
+    return (
+      <div className="field">
+        <label htmlFor={name} className="label">
+          {label}
+        </label>
+        <div className={controlClass}>
+          <Control
+            name={name}
+            id={name}
+            className={inputClass}
+            type={type}
+            placeholder={placeholder}
+            value={value}
+            onChange={onChange}
+          />
+          {error && (
+            <span className="icon is-small is-right">
+              <i className="fas fa-exclamation-triangle" />
+            </span>
+          )}
+        </div>
+
         {error && (
-          <span className="icon is-small is-right">
-            <i className="fas fa-exclamation-triangle" />
-          </span>
+          <p className="help is-danger">{error}</p>
         )}
       </div>
-
-      {error && (
-        <p className="help is-danger">{error}</p>
-      )}
-    </div>
-  );
-});
+    );
+  }
+}
 
 FormField.propTypes = {
   name: PropTypes.string.isRequired,
@@ -54,12 +71,12 @@ FormField.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   type: PropTypes.string,
-  error: PropTypes.string,
   placeholder: PropTypes.string,
 };
 
 FormField.defaultProps = {
-  error: '',
   type: 'text',
   placeholder: 'Type text here',
 };
+
+export default FormField;

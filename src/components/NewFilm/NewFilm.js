@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FormField } from '../FormField';
+import FormField from '../FormField/FormField';
 import { required } from '../../validation';
 
 const initialState = {
@@ -28,7 +28,7 @@ const formValidators = {
   imdbUrl: required,
 };
 
-export class NewFilm extends Component {
+class NewFilm extends Component {
   state = initialState;
 
   getFormValue() {
@@ -48,8 +48,8 @@ export class NewFilm extends Component {
     }));
   };
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  handleSubmit = (e) => {
+    e.preventDefault();
 
     const { onAdd } = this.props;
     const formValue = this.getFormValue();
@@ -150,3 +150,5 @@ export class NewFilm extends Component {
 NewFilm.propTypes = {
   onAdd: PropTypes.func.isRequired,
 };
+
+export default NewFilm;

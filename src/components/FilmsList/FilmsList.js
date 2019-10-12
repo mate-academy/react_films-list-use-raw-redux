@@ -1,29 +1,41 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import './FilmsList.scss';
-import { FilmCard } from '../FilmCard';
 
-export const FilmsList = (props) => {
-  const { films } = props;
+import { store } from '../../store/reducers';
+import FilmCard from '../FilmCard/FilmCard';
 
-  return (
-    <div className="films">
-      {films.map(film => (
-        <FilmCard key={film.id} {...film} />
-      ))}
-    </div>
-  );
-};
+export class FilmsList extends Component {
+  state = {
+    films: store.getState().films,
+  };
 
-FilmsList.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string,
-    imgUrl: PropTypes.string.isRequired,
-    imdbUrl: PropTypes.string.isRequired,
-  })),
-};
+  componentDidMount() {
 
-FilmsList.defaultProps = {
-  films: [],
-};
+    this.unSubscribe = store.subscribe(() => {
+      const { films } = this.state;
+      const newFilms = store.getState().films;
+
+      if (films.length !== newFilms.length) {
+        this.setState({
+          films: store.getState().films,
+        });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.unSubscribe();
+  }
+
+  render() {
+    const { films } = this.state;
+
+    return (
+      <div className="films">
+        {films.map((film) => (
+          <FilmCard key={film.id} {...film} />
+        ))}
+      </div>
+    );
+  }
+}
