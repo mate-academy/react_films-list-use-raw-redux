@@ -6,7 +6,7 @@ import {
   Route,
 } from 'react-router-dom';
 
-import uuid from 'uuidv4';
+import uuidv4 from 'uuidv4';
 import { FilmsList } from './components/FilmsList';
 import { NewFilm } from './components/NewFilm';
 import { FormField } from './components/FormField';
@@ -44,7 +44,7 @@ export class App extends Component {
         } = data;
 
         const newFilm = {
-          id: uuid(),
+          id: uuidv4(),
           title: Title,
           description: Plot,
           imgUrl: Poster,
