@@ -51,7 +51,7 @@ export class App extends Component {
     const { searchWord } = this.state;
 
     return (
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <div className="page">
           <div className="content">
             <div className="box">
