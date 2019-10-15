@@ -40,6 +40,7 @@ store.dispatch(
     imdbUrl: 'https://www.imdb.com/title/tt0107048/',
   })
 );
+
 // console.log('STATE', store.getState());
 //
 // const unsubscribe1 = store.subscribe((state) => {
