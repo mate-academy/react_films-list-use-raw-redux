@@ -1,4 +1,5 @@
 import { createStore } from './redux';
+import { films } from '../data';
 
 const ACTION_TYPES = {
   ADD_NEW_FILM: 'FILM::ADD',
@@ -10,7 +11,7 @@ export const addNewFilm = film => ({
 });
 
 const initialState = {
-  films: [],
+  films,
 };
 
 function reducer(state = initialState, action = {}) {
